@@ -1,0 +1,13 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Invoice Consolidation</title><link rel="stylesheet" href="/static/style.css"></head>
+<body><div class="wrap"><h1>Invoice Consolidation Web App</h1>
+<p class="muted">Master records: {{ master_count }}</p>
+{% with messages=get_flashed_messages() %}{% for m in messages %}<div class="flash">{{m}}</div>{% endfor %}{% endwith %}
+<div class="card"><h2>1. Upload Files</h2>
+<form action="/process" method="post" enctype="multipart/form-data">
+<label>Invoice Excel<input type="file" name="invoice" required></label>
+<label>Master List Excel<input type="file" name="master" required></label>
+<label>Output Template Excel<input type="file" name="template" required></label>
+<button>Process Invoice</button></form></div>
+<div class="card"><h2>Master List</h2><a class="button" href="/master">Open Master List Manager</a></div>
+</div></body></html>

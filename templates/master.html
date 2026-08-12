@@ -1,0 +1,11 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Master List Manager</title><link rel="stylesheet" href="/static/style.css"></head>
+<body><div class="wrap"><h1>Master List Manager</h1>
+{% with messages=get_flashed_messages() %}{% for m in messages %}<div class="flash">{{m}}</div>{% endfor %}{% endwith %}
+<div class="card"><h2>Import Master List</h2><form action="/master/import" method="post" enctype="multipart/form-data"><input type="file" name="master" required><button>Import / Update</button></form></div>
+<div class="card"><h2>Add / Update Item</h2><form action="/master/save" method="post" class="grid">
+<label>HS Code<input name="hs_code" required></label><label>Product Code<input name="product_code"></label><label>Description<input name="description"></label>
+<button>Save</button></form></div>
+<div class="card"><form><input name="q" value="{{q}}" placeholder="Search HS Code / Product Code"><button>Search</button></form>
+<table><tr><th>ID</th><th>HS Code</th><th>Product Code</th><th>Description</th><th>Action</th></tr>
+{% for r in rows %}<tr><td>{{r.id}}</td><td>{{r.hs_code}}</td><td>{{r.product_code}}</td><td>{{r.description}}</td><td><form action="/master/delete/{{r.id}}" method="post"><button class="danger">Delete</button></form></td></tr>{% endfor %}</table></div>
+<a href="/">Back</a></div></body></html>

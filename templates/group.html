@@ -1,0 +1,18 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Choose Groups</title><link rel="stylesheet" href="/static/style.css"></head>
+<body><div class="wrap"><h1>2. Product Group & Output Selection</h1>
+<div class="stats"><span>Consolidated rows: {{count}}</span><span>Unique invoices: {{invoice_count}}</span><span>Non-Control: {{noncontrol}}</span><span>HS not found: {{unmatched}}</span></div>
+<form action="/generate" method="post">
+<input type="hidden" name="template" value="{{template}}">
+<div class="card"><h2>Header Details</h2><div class="grid">
+{% for f in ["Inward MAWB","Inward HAWB","Arrival Date","Inward Flight / Voyage Number","Inward Vessel Name","Loading Port","Load Port Code","Total Gross Wt","Gross Weight UOM","Outer Pack Count","Out Pack UOM"] %}
+<label>{{f}}<input name="{{f}}"></label>
+{% endfor %}</div></div>
+<div class="card"><h2>Product Code Types</h2>
+{% for t in types %}<label class="check"><input type="checkbox" name="types" value="{{t}}"> {{t}}</label>{% endfor %}
+{% if noncontrol %}<label class="check noncontrol"><input type="checkbox" name="types" value="NONCONTROL"> Non-Control Items ({{noncontrol}})</label>{% endif %}
+<p class="muted">Select all types that belong to this output group. The current release generates one selected group per submission.</p></div>
+<div class="card"><h2>Origin Split</h2>
+<label class="radio"><input type="radio" name="split" value="none" checked> No need to split origin-wise</label>
+<label class="radio"><input type="radio" name="split" value="origin"> Split origin-wise</label></div>
+<button>Generate Excel</button></form>
+<p><a href="/">Start over</a></p></div></body></html>
